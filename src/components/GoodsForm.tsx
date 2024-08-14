@@ -4,11 +4,11 @@ import { Good } from "../types";
 import { getColorById, colors } from "../utils/colors";
 
 type Props = {
-    onSubmit: (newGood: Good) => void;
+    onSubmit?: (newGood: Good) => void;
     good?: Good;
 }
 
-export const GoodsForm = ({ onSubmit, good }: Props) => {
+export const GoodsForm = ({ onSubmit = ()=>{}, good }: Props) => {
 
   const [newGoodName, setNewGoodName] = useState(good?.name || '');
   const [selectedColorId, setSelectedColorId] = useState( good?.colorId || 0);
@@ -26,8 +26,6 @@ export const GoodsForm = ({ onSubmit, good }: Props) => {
       setNameError('No name typed!');
       return;
     }
-
-    console.log(newGoodName, selectedColorId);
     const newId = good?.id || Date.now();
     const newGood = {
       id: newId,
@@ -56,10 +54,10 @@ export const GoodsForm = ({ onSubmit, good }: Props) => {
             setNewGoodName(event.target.value);
           }}
           onFocus={() => {
-            console.log("Focused!!");
+            //console.log("Focused!!");
           }}
           onBlur={() => {
-            console.log("onBlur!!");
+            //console.log("onBlur!!");
           }}
           value={newGoodName}
           required
@@ -72,15 +70,15 @@ export const GoodsForm = ({ onSubmit, good }: Props) => {
           className={classNames({ "with-error": colorIdError })}
           name="good_color"
           onChange={(event) => {
-            console.log("value changed " + event.target.value);
+            //console.log("value changed " + event.target.value);
             setColorIdError("");
             setSelectedColorId(+event.target.value);
           }}
           onFocus={() => {
-            console.log("Focused!!");
+            //console.log("Focused!!");
           }}
           onBlur={() => {
-            console.log("onBlur!!");
+            //console.log("onBlur!!");
           }}
           value={selectedColorId}
         >
@@ -91,7 +89,7 @@ export const GoodsForm = ({ onSubmit, good }: Props) => {
           {colors.map((color) => (
             <option
               onFocus={() => {
-                console.log("Focused item!! " + color.id);
+                //console.log("Focused item!! " + color.id);
               }}
               key={color.id}
               value={color.id}
