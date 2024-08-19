@@ -1,28 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import { log } from "console";
 import { Good } from "../types/good";
 import { GoodCard } from "./GoodCard";
 import GoodCardC from "../legacy_components/GoodCardC";
+import { GoodsContext } from "../GoodsContext";
 
-type Props = {
-  goods: Good[];
-  onDelete?: (goodId: number) => void;
-  onUpdate?: (good: Good) => void;
-};
-
-const Component =  ({
-  goods,
-  onDelete = () => {},
-  onUpdate = () => {},
-}: Props) => {
-
-  console.log('Render GoodsList component');
+// function component
+const Component =  () => {
+  const goods = useContext(GoodsContext);
   
+  console.log('Render GoodsList component');
+  // JSX
   return (
     <div className="GoodList">
       {goods.map((good) => (
         <article key={good.id} className="GoodCard">
-          <GoodCardC good={good} onDelete={onDelete} onUpdate={onUpdate} />
+          <GoodCard good={good}/>
         </article>
       ))}
     </div>

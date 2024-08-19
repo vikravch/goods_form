@@ -6,6 +6,7 @@ type Props = {
     good: Good;
     onDelete: (goodId: number) => void;
     onUpdate: (good: Good) => void;
+    onDeletedItem: (good: Good) => void;
 }
 type State = {
     isEditing: boolean;
@@ -16,7 +17,7 @@ export default class GoodCardC extends React.Component<  Props,   State   > {
   // override!! 
   state: State = {
     isEditing: false,
-  };  
+  };
   /*constructor(props: Props)  {
     super(props);
     this.state = {
@@ -32,8 +33,12 @@ export default class GoodCardC extends React.Component<  Props,   State   > {
     this.props.onUpdate(newGood);
     this.setState({isEditing: false});
   }
+  componentWillUnmount(): void {
+    console.log('GoodCardC componentWillUnmount');
+    
+  }
 
-  // override
+  // override - lifecycle method
   render(): ReactNode {
     // example!!!!
     //const component: React.Component = new React.Component({});
@@ -59,6 +64,7 @@ export default class GoodCardC extends React.Component<  Props,   State   > {
           <button
             onClick={() => {
                 this.setState({isEditing: true});
+                this.props.onDeletedItem(this.props.good);
             }}
           >
             Edit
